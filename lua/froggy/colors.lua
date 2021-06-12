@@ -5,6 +5,7 @@ vim.g.colors_name = "froggy"
 local NONE = "NONE"
 local b    = "bold"
 local i    = "italic"
+local st   = "strikethrough"
 local inv  = "inverse"
 local ul   = "underline"
 local uc   = "undercurl"
@@ -69,7 +70,7 @@ local navyblue       = "#6699CC"
 
 return {
   -- Normal
-  Normal = {bg = NONE, fg = dslight1},
+  Normal = {fg = dslight1},
 
   -- Text Analysis
   Comment = {fg = dsdark3, style = i},
@@ -78,11 +79,11 @@ return {
   Whitespace = "NonText",
 
   -- Literals
-  Constant = {fg = orange_light},
+  Constant = {fg = tan},
   String = {fg = green},
   Character = {fg = purple},
-  Number = {fg = purple},
-  Boolean = {fg = red_dark},
+  Number = {fg = red},
+  Boolean = {fg = turqoise},
   Float = "Number",
 
   -- Identifiers
@@ -107,7 +108,7 @@ return {
   PreCondit = {fg = tan, style = i},
 
   -- Semantics
-  Type = {fg = yellow},
+  Type = {fg = tan},
   StorageClass = {fg = orange},
   Structure = {fg = blue, style = b},
   Typedef = {fg = cyan, style = i},
@@ -117,15 +118,15 @@ return {
   SpecialChar = {fg = red_light, style = i},
   SpecialKey = "Character",
   Tag = "Underlined",
-  Delimiter = {fg = orange},
+  Delimiter = {fg = dslight3},
   SpecialComment = {fg = gray, style = {b, noc}},
   Debug = "WarningMsg",
 
   -- Help Syntax
   Underlined = {fg = turqoise, style = ul},
   Ignore = {fg = gray},
-  Error = {fg = red_dark},
-  Todo = {fg = yellow, style = {b, ul}},
+  Error = {fg = red},
+  Todo = {fg = tan, style = b},
   helpHyperTextJump = "Underlined",
   helpSpecial = "Special",
   Hint = {fg = green_darker},
@@ -216,12 +217,73 @@ return {
   CursorColumn = {bg = gray_dark},
 
   -- Notify
-  EchoERROR = {fg = red_dark},
-  EchoWARN = {fg = orange},
-  EchoINFO = {fg = pink_light},
+  EchoERROR = "Error",
+  EchoWARN = "Warning",
+  EchoINFO = "Info",
   EchoTRACE = {fg = turqoise},
   EchoDEBUG = {fg = "Olive"},
 
   -- Misc
   Directory = {fg = ice, style = b},
+  Builtin = {fg = red, style = b},
+
+  -- TreeSitter (:he nvim-treesitter-highlights)
+  TSAnnotation = "PreProc",
+  TSAttribute = "PreProc",
+  TSBoolean = "Boolean",
+  TSCharacter = "Character",
+  TSConditional = "Conditional",
+  TSConstBuiltin = "Constant",
+  TSConstMacro = "Define",
+  TSConstant = "Constant",
+  TSConstructor = "Identifier",
+  TSDanger = "WarningMsg",
+  TSError = "Error",
+  TSEmphasis = {style = i},
+  TSEnviroment = "Macro",
+  TSEnviromentName = "Type",
+  TSException = "Exception",
+  TSField = "Identifier",
+  TSFloat = "Float",
+  TSFuncBuiltin = "Function",
+  TSFuncMacro = "Macro",
+  TSFunction = "Function",
+  TSInclude = "Include",
+  TSKeyword = "Keyword",
+  TSKeywordFunction = "Keyword",
+  TSKeywordOperator = "Operator",
+  TSLabel = "Label",
+  TSLiteral = "String",
+  TSMath = "Special",
+  TSMethod = "Method",
+  TSNamespace = "Include",
+  TSNone = {},
+  TSNote = "Note",
+  TSNumber = "Number",
+  TSOperator = "Operator",
+  TSParameter = "Argument",
+  TSParameterReference = "Argument",
+  TSProperty = "Identifier",
+  TSPunctBracket = "Delimiter",
+  TSPunctDelimiter = "Delimiter",
+  TSPunctSpecial = "Delimiter",
+  TSRepeat = "Repeat",
+  TSStrike = {style = st},
+  TSString = "String",
+  TSStringEscape = "SpecialChar",
+  TSStringRegex = "String",
+  TSStrong = {style = b},
+  TSSymbol = "Symbol",
+  TSTag = "Label",
+  TSTagDelimiter = "Delimiter",
+  TSText = "Text",
+  TSTextReference = "Constant",
+  TSTitle = "Title",
+  TSType = "Type",
+  TSTypeBuiltin = "Type",
+  TSURI = "Underlined",
+  TSUnderline = {style = ul},
+  TSVariable = "Normal",
+  TSVariableBuiltin = "Special",
+  -- TSWarning = "Warning",
 }

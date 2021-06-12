@@ -2,12 +2,14 @@
 vim.cmd("syntax reset")
 
 local NONE = "NONE"
+local default = vim.g.froggy_default_bg or NONE
 
 local function blend(command, attrs)
   if attrs.blend then command[#command + 1] = " blend=" .. attrs.blend end
 end
 
 local function colorize(command, attrs)
+  attrs.bg = attrs.bg or default
   command[#command + 1] = (" guibg=%s guifg=%s"):format(attrs.bg, attrs.fg)
   blend(command, attrs)
 end
@@ -53,7 +55,5 @@ return function(highlights)
     highlights.Normal = nil
   end
 
-  for highlight_group, attributes in pairs(highlights) do
-    highlight(highlight_group, attributes)
-  end
+  for highlight_group, attributes in pairs(highlights) do highlight(highlight_group, attributes) end
 end
