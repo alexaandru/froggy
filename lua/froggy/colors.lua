@@ -72,6 +72,10 @@ return {
   -- Normal
   Normal = {fg = dslight1},
 
+  -- Float
+  NormalFloat = {fg = dslight3},
+  FloatBorder = {fg = dslight2},
+
   -- Text Analysis
   Comment = {fg = dsdark3, style = i},
   NonText = {fg = blue},
