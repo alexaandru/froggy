@@ -73,8 +73,8 @@ return {
   Normal = {fg = dslight1},
 
   -- Float
-  NormalFloat = {fg = dslight3},
-  FloatBorder = {fg = dslight2},
+  NormalFloat = {fg = dslight3, bg = dsdark1},
+  FloatBorder = {fg = dslight2, bg = dsdark1},
 
   -- Text Analysis
   Comment = {fg = dsdark3, style = i},
