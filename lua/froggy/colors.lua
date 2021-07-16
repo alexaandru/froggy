@@ -148,7 +148,7 @@ return {
   TabLine = {bg = gray_darker, fg = dsdark4},
   TabLineFill = {bg = blue},
   TabLineSel = {fg = dslight3},
-  Title = {fg = dslight3},
+  Title = {fg = orange},
 
   -- Conceal={}
   CursorLine = {bg = gray_darker},
