@@ -71,6 +71,7 @@ local navyblue       = "#6699CC"
 return {
   -- Normal
   Normal = {fg = dslight1},
+  Conceal = "Statement",
 
   -- Float
   NormalFloat = {fg = dslight3, bg = dsdark1},
