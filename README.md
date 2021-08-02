@@ -7,3 +7,4 @@ The theme in this repo is a strip down of the latter, plus my customizations.
 ### Requirements
 
 - Neovim 0.5+
+- [Hotpot](https://github.com/rktjmp/hotpot.nvim)
