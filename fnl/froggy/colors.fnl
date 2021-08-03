@@ -203,6 +203,7 @@
  :LspReferenceRead {:fg "#FFCA33" :style b}
  :LspReferenceText {:fg "#FFAA33" :style b}
  :LspReferenceWrite {:fg "#FF8A33" :style b}
+ :LspCodeLens {:fg teal :style i}
  ;; TreeSitter (:he nvim-treesitter-highlights)
  :TSAnnotation :PreProc
  :TSAttribute :PreProc
