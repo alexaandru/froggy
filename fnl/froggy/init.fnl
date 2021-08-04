@@ -1,47 +1,40 @@
-(vim.cmd "syntax reset")
-
 (local NONE :NONE)
 (local default (or vim.g.froggy_default_bg NONE))
+(local ins table.insert)
+(local concat table.concat)
+(local fmt string.format)
 
-(fn blend [command attrs]
-  (if attrs.blend
-      (table.insert command (.. :blend= attrs.blend))))
+(fn blend [cmd attrs]
+  (if attrs.blend (ins cmd (fmt "blend=%s" attrs.blend))))
 
-(fn colorize [command attrs]
+(fn colorize [cmd attrs]
   (let [bg (or attrs.bg default)
         fg attrs.fg]
-    (table.insert command (string.format "guibg=%s guifg=%s" bg fg))
-    (blend command attrs)))
+    (ins cmd (fmt "guibg=%s guifg=%s" bg fg))
+    (blend cmd attrs)))
 
-(fn stylize [command style color]
-  (table.insert command (.. :gui= style))
-  (if color
-      (table.insert command (.. :guisp= color))))
+(fn stylize [cmd style color]
+  (ins cmd (fmt "gui=%s" style))
+  (if color (ins cmd (fmt "guisp=%s" color))))
 
-(fn highlight [highlight-group attrs]
-  (var attrs (or attrs {}))
-  (let [cmd [:hi! highlight-group]]
-    (when (. attrs vim.o.background)
-      (set attrs.__index attrs)
-      (set attrs (setmetatable (. attrs vim.o.background) attrs)))
-    (let [link (or (and (= (type attrs) :string) attrs) attrs.link)]
-      (if link (do
-                 (tset cmd 3 (. cmd 2))
-                 (tset cmd 2 :link)
-                 (tset cmd 4 link))
-          (do
-            (colorize cmd attrs)
-            (let [style (or (. attrs :style) NONE)]
-              (if (= (type style) :table)
-                  (stylize cmd (table.concat style ",") style.color)
-                  (stylize cmd style))))))
-    (vim.cmd (table.concat cmd " "))))
+;; TODO: https://github.com/neovim/neovim/issues/9876
+(fn hi! [group attrs]
+  (let [cmd [:hi! group]
+        attrs (or attrs {})
+        link (if (= (type attrs) :string) attrs false)]
+    (if link (vim.cmd (concat [:hi! :link group link] " "))
+        (let [style (or (. attrs :style) NONE)]
+          (colorize cmd attrs)
+          (if (= (type style) :table)
+              (stylize cmd (concat style ",") style.color)
+              (stylize cmd style))
+          (vim.cmd (concat cmd " "))))))
 
 (fn [highlights]
   (let [normal highlights.Normal]
-    (when normal
-      (highlight :Normal normal)
+    (when normal ; needs to be applied 1st
+      (hi! :Normal normal)
       (set highlights.Normal nil))
-    (each [hi-group attrs (pairs highlights)]
-      (highlight hi-group attrs))))
+    (each [group attrs (pairs highlights)]
+      (hi! group attrs))))
 
