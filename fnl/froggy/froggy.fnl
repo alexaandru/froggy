@@ -146,14 +146,14 @@
    :Directory {:fg "#49a0f0" :style b}
    :Builtin {:fg "#fb4934" :style b}
    ;; LSP
-   :LspDiagnosticsSignError :LspDiagnosticsVirtualTextError
-   :LspDiagnosticsSignHint :LspDiagnosticsVirtualTextHint
-   :LspDiagnosticsSignInformation :LspDiagnosticsVirtualTextInformation
-   :LspDiagnosticsSignWarning :LspDiagnosticsVirtualTextWarning
-   :LspDiagnosticsVirtualTextError :Error
-   :LspDiagnosticsVirtualTextHint :Hint
-   :LspDiagnosticsVirtualTextInformation :Info
-   :LspDiagnosticsVirtualTextWarning :Warning
+   :DiagnosticError :Error
+   :DiagnosticHint :Hint
+   :DiagnosticInfo :Info
+   :DiagnosticWarn :Warning
+   :DiagnosticUnderlineError {:style {1 uc :color "#e02730"}}
+   :DiagnosticUnderlineWarn {:style {1 uc :color "#71626d"}}
+   :DiagnosticUnderlineInfo {:style {1 uc :color "#61525d"}}
+   :DiagnosticUnderlineHint {:style {1 uc :color :Green}}
    :LspReferenceRead {:fg "#FFCA33" :style b}
    :LspReferenceText {:fg "#FFAA33" :style b}
    :LspReferenceWrite {:fg "#FF8A33" :style b}
