@@ -72,13 +72,13 @@
    ;; Help Syntax
    :Underlined {:fg "#2bff99" :style ul}
    :Ignore {:fg "#928374"}
-   :Error {:fg "#fb4934"}
+   :Error {:fg "#ff5943"}
    :Todo {:fg "#f4c069" :style b}
    :helpHyperTextJump :Underlined
    :helpSpecial :Special
-   :Hint {:fg :Green}
-   :Info {:fg :Pink}
-   :Warning {:fg "#fe8019"}
+   :Hint {:fg "#41624d"}
+   :Info {:fg "#41424d"}
+   :Warning {:fg "#71626d"}
    ;; Cursor
    :Cursor {:style inv}
    :CursorColumn {:bg "#3c3836"}
