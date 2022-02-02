@@ -15,11 +15,9 @@
 (let [NONE :NONE
       b :bold
       i :italic
-      st :strikethrough
-      inv :inverse
+      inv :reverse
       ul :underline
-      uc :undercurl
-      noc :nocombine]
+      uc :undercurl]
   {;; Normal
    :Normal {:fg "#ebdbb2"}
    :Conceal :Statement
@@ -56,8 +54,8 @@
    :Type {:fg "#f4c069"}
    :Typedef {:fg "#8ec07c" :style i}
    ;; Metatextual Information
-   :Define {:fg "#83a598" :style noc}
-   :Include {:fg "#83a598" :style noc}
+   :Define {:fg "#83a598"}
+   :Include {:fg "#83a598"}
    :PreProc {:fg "#f4c069"}
    :Macro {:fg "#83a598" :style i}
    :PreCondit {:fg "#f4c069" :style i}
@@ -66,7 +64,7 @@
    :Delimiter {:fg "#bdae93"}
    :Special {:fg "#d5508f" :style b}
    :SpecialChar {:fg "#ff4090" :style i}
-   :SpecialComment {:fg "#928374" :style [b noc]}
+   :SpecialComment {:fg "#928374" :style b}
    :SpecialKey :Character
    :Tag :Underlined
    ;; Help Syntax

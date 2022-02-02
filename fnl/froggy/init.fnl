@@ -1,40 +1,31 @@
-(local NONE :NONE)
-(local default (or vim.g.froggy_default_bg NONE))
-(local ins table.insert)
-(local concat table.concat)
-(local fmt string.format)
+(local default-bg (or vim.g.froggy_default_bg :NONE))
 
-(fn blend [cmd attrs]
-  (if attrs.blend (ins cmd (fmt "blend=%s" attrs.blend))))
+(fn set-hl [group attrs]
+  (vim.api.nvim_set_hl 0 group attrs))
 
-(fn colorize [cmd attrs]
-  (let [bg (or attrs.bg default)
-        fg attrs.fg]
-    (ins cmd (fmt "guibg=%s guifg=%s" bg fg))
-    (blend cmd attrs)))
+(fn stylize [attrs]
+  (let [style attrs.style
+        set-style #(tset attrs $ true)]
+    (set attrs.style nil)
+    (match (type style)
+      :string (set-style style)
+      :table (let [color style.color]
+               (when color
+                 (set attrs.sp color)
+                 (set style.color nil))
+               (vim.tbl_map set-style style)))
+    attrs))
 
-(fn stylize [cmd style color]
-  (ins cmd (fmt "gui=%s" style))
-  (if color (ins cmd (fmt "guisp=%s" color))))
-
-;; TODO: https://github.com/neovim/neovim/issues/9876
 (fn hi! [group attrs]
-  (let [cmd [:hi! group]
-        attrs (or attrs {})
-        link (if (= (type attrs) :string) attrs false)]
-    (if link (vim.cmd (concat [:hi! :link group link] " "))
-        (let [style (or (. attrs :style) NONE)]
-          (colorize cmd attrs)
-          (if (= (type style) :table)
-              (stylize cmd (concat style ",") style.color)
-              (stylize cmd style))
-          (vim.cmd (concat cmd " "))))))
+  (if (= (type attrs) :string) (set-hl group {:link attrs})
+      (let [attrs (or attrs {})]
+        (if (not attrs.bg) (set attrs.bg default-bg))
+        (set-hl group (stylize attrs)))))
 
 (fn [highlights]
-  (let [normal highlights.Normal]
-    (when normal ; needs to be applied 1st
-      (hi! :Normal normal)
-      (set highlights.Normal nil))
-    (each [group attrs (pairs highlights)]
-      (hi! group attrs))))
+  (when highlights.Normal ; needs to be applied 1st
+    (hi! :Normal highlights.Normal)
+    (set highlights.Normal nil))
+  (each [group attrs (pairs highlights)]
+    (hi! group attrs)))
 

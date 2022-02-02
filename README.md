@@ -12,5 +12,5 @@ It also includes a [Popping and Locking](https://marketplace.visualstudio.com/it
 
 ### Requirements
 
-- Neovim 0.5+
+- Neovim 0.7+
 - [Hotpot](https://github.com/rktjmp/hotpot.nvim)
