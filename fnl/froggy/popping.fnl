@@ -3,8 +3,8 @@
 ;; `and locking` clone
 
 ;; <highlight group name> {
-;;   :bg <color>      ;; The color for the background, `NONE`, `FG` or `BG`
-;;   :fg <color>      ;; The color for the foreground, `NONE`, `FG` or `BG`
+;;   :bg <color>      ;; The color for the background
+;;   :fg <color>      ;; The color for the foreground
 ;;   :blend <integer> ;; The |highlight-blend| value, if one is desired.
 ;;                    ;; Style can be 'bold', 'italic', and more.
 ;;                    ;; See |attr-list| for more information.
@@ -14,8 +14,7 @@
 ;; 
 ;; You can also link one highlight group to another:
 ;; <highlight group name> '<highlight group name>'
-(let [NONE :NONE
-      b :bold
+(let [b :bold
       i :italic
       inv :reverse
       ul :underline
@@ -98,7 +97,7 @@
    :EchoWARN :Warning
    ;; Conditional Column Highlighting
    :ColorColumn {:bg "#35312f"}
-   :SignColumn {:bg NONE}
+   :SignColumn {:bg nil}
    ;; Diffs
    :DiffAdd {:fg "#50de60" :style inv}
    :DiffChange {:fg "#fabd2f" :style inv}

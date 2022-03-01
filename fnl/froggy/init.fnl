@@ -1,4 +1,4 @@
-(local default-bg (or vim.g.froggy_default_bg :NONE))
+(local default-bg (or vim.g.froggy_default_bg nil))
 
 (fn set-hl [group attrs]
   (vim.api.nvim_set_hl 0 group attrs))
