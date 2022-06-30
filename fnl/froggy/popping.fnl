@@ -23,7 +23,7 @@
    :Normal {:fg "#ebdbb2"}
    :Conceal :Statement
    ;; Float
-   :NormalFloat {:fg "#bdae93" :bg "#3c3836"}
+   :NormalFloat {:fg "#bbccbb" :bg "#33333F"}
    :FloatBorder {:fg "#d5c4a1" :bg "#3c3836"}
    ;; Text Analysis
    :Comment {:fg "#666677" :style i}
@@ -157,6 +157,7 @@
    :LspReferenceText {:fg "#FFAA33" :style [b inv]}
    :LspReferenceWrite {:fg "#FF8A33" :style [b inv]}
    :LspCodeLens {:fg "#00d0c0" :style i}
+   :LspSignatureActiveParameter {:style {1 uc :color "#fabd2f"}}
    ;; TreeSitter (:he nvim-treesitter-highlights)
    :TSAnnotation :PreProc
    :TSAttribute :PreProc

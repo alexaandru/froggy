@@ -1,4 +1,4 @@
-(local default-bg (or vim.g.froggy_default_bg nil))
+(local bg (or vim.g.froggy_default_bg :NONE))
 
 (fn set-hl [group attrs]
   (vim.api.nvim_set_hl 0 group attrs))
@@ -18,8 +18,9 @@
 
 (fn hi! [group attrs]
   (if (= (type attrs) :string) (set-hl group {:link attrs})
-      (let [attrs (or attrs {})]
-        (if (not attrs.bg) (set attrs.bg default-bg))
+      (let [attrs (or attrs {})
+            bg (if (= :Normal group) bg :NONE)]
+        (if (not attrs.bg) (set attrs.bg bg))
         (set-hl group (stylize attrs)))))
 
 (fn [highlights]
