@@ -23,6 +23,9 @@
   {;; Normal
    :Normal {:fg "#dbebb2"}
    :Conceal :Statement
+   ;; WinBar
+   :WinBar {:fg "#f4c069"}
+   :WinBarNC {:fg "#227777"}
    ;; Float
    :NormalFloat :PMenu
    :FloatBorder {:bg "#44444F" :fg "#55555F" :blend 10}
@@ -78,8 +81,8 @@
    :helpHyperTextJump :Underlined
    :helpSpecial :Special
    :Hint {:fg "#41624d"}
-   :Info {:fg "#41424d"}
-   :Warning {:fg "#71626d"}
+   :Info {:fg "#81bdf2"}
+   :Warning {:fg "#ff9983"}
    ;; Cursor
    :Cursor {:style inv}
    :CursorColumn {:bg "#3c3836"}
@@ -101,10 +104,10 @@
    :ColorColumn {:bg "#35312f"}
    :SignColumn {:bg nil}
    ;; Diffs
-   :DiffAdd {:fg "#50de60" :style inv}
-   :DiffChange {:fg "#fabd2f" :style inv}
-   :DiffDelete {:fg "#227777" :style inv}
-   :DiffText {:style inv}
+   :diffAdded {:fg "#50de60"}
+   :diffChanged {:fg "#faad2f"}
+   :diffRemoved {:fg "#FF3777"}
+   :diffCommon {:style inv}
    ;; Folds
    :FoldColumn {:bg "#242a32" :style b}
    :Folded {:fg "#83a598" :style i}
