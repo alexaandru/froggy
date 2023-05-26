@@ -1,2 +1,2 @@
-vim.cmd("syntax reset")
+vim.cmd.syntax "reset"
 require("froggy")(require "froggy.colors.froggy")

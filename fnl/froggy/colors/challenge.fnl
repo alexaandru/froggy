@@ -1,4 +1,4 @@
-(set vim.g.colors_name :froggy)
+(set vim.g.colors_name :challenge)
 
 ;; <highlight group name> {
 ;;   :bg <color>      ;; The color for the background
@@ -12,6 +12,8 @@
 ;; 
 ;; You can also link one highlight group to another:
 ;; <highlight group name> '<highlight group name>'
+
+;; fnlfmt: skip
 (let [b :bold
       i :italic
       inv :reverse
@@ -21,68 +23,78 @@
       udd :underdotted
       udh :underdashed]
   {;; Normal
-   :Normal {:fg "#ebdbb2"}
+   :Normal {:fg "#dbebb2"}
    :Conceal :Statement
    ;; WinBar
    :WinBar {:fg "#f4c069"}
    :WinBarNC {:fg "#227777"}
    ;; Float
    :NormalFloat :PMenu
-   :FloatBorder {:bg "#44444f" :fg "#55555f" :blend 10}
+   :FloatBorder {:bg "#333363" :fg "#229999" :blend 10}
    :FloatTitle :PMenu
    ;; Text Analysis
-   :Comment {:fg "#666677" :style i}
+   :Comment {:fg "#555566" :style i}
    :NonText {:fg "#83a598"}
    :EndOfBuffer :NonText
    :Whitespace :NonText
    ;; Literals
-   :Constant {:fg "#f4c069"}
-   :String {:fg "#98C379"}
-   :Character {:fg "#C678DD"}
-   :Number {:fg "#fb4934"}
-   :Boolean {:fg "#2bff99"}
+   :Constant :String
+   :String {:fg "#c9ff9a"}
+   :Character {:fg "#aae9ff"}
+   :Number {:fg "#ffccee"}
+   :Boolean {:fg "#ffccee"}
    :Float :Number
    ;; Identifiers
+   :Variable {:fg "#fefeee"}
+   :Parameter {:fg "#feceee"}
    :Identifier {:fg "#83a598"}
-   :Function {:fg "#98C379" :style b}
+   :Function {:fg "#ff77a7" :style [b i]}
+   :BuiltinFunction {:fg "#ff4444" :style b}
    ;; Syntax
-   :Statement {:fg "#fb4934"}
-   :Conditional {:fg "#fb4934" :style i}
-   :Repeat {:fg "#fb4934"}
-   :Label {:fg "#BD93BD" :style i}
-   :Operator {:fg "#83a598"}
-   :Keyword {:fg "#fb4934"}
-   :Exception {:fg "#fb4934" :style b}
+   :Statement {:fg "#ffff60"}
+   :Conditional {:fg "#91ddff" :style i}
+   :Repeat :Keyword
+   :Label {:fg "#ffe9aa" :bg "#551133" :style i}
+   :Operator :Type
+   :Keyword {:fg "#bf4777"}
+   :Exception {:fg "#227777" :style b}
    :Noise :Delimiter
    ;; Semantics
    :StorageClass {:fg "#fe8019"}
-   :Structure {:fg "#83a598" :style b}
-   :Type {:fg "#f4c069"}
-   :Typedef {:fg "#8ec07c" :style i}
+   :Structure :Type
+   :Type {:fg "#bf9a55"}
+   :BuiltinType {:fg "#dfaa65"}
+   :ParameterType {:fg "#ffca55" :style b}
+   :TypeType {:fg "#caff55" :style b}
+   :Typedef :Type
    ;; Metatextual Information
-   :Define {:fg "#83a598"}
-   :Include {:fg "#83a598"}
-   :PreProc {:fg "#f4c069"}
+   :Define {:fg "#ff4787"}
+   :Include {:fg "#ff2163"}
+   :PreProc {:fg "#15a193"}
    :Macro {:fg "#83a598" :style i}
    :PreCondit {:fg "#f4c069" :style i}
    ;; Edge Cases
    :Debug :WarningMsg
-   :Delimiter {:fg "#bdae93"}
-   :Special {:fg "#d5508f" :style b}
-   :SpecialChar {:fg "#ff4090" :style i}
+   :Delimiter {:fg "#777777"}
+   :Special {:fg "#d5F08f" :style b}
+   :SpecialChar {:fg "#aaaab6" :style i}
    :SpecialComment {:fg "#928374" :style b}
    :SpecialKey :Character
    :Tag :Underlined
    ;; Help Syntax
    :Underlined {:fg "#2bff99" :style ul}
    :Ignore {:fg "#928374"}
-   :Error {:fg "#ff5943"}
-   :Todo {:fg "#f4c069" :style b}
+   :Error {:fg "#ff1153" :style b}
+   :Todo {:fg "#eeb943" :bg "#551133" :style b}
+   "@text.danger" :Todo
+   "@text.warning" :Todo
+   "@text.note" {:fg "#fff0f0"}
+   "@text.uri" {:fg "#c9ff9a" :style [i ul]}
    :helpHyperTextJump :Underlined
    :helpSpecial :Special
    :Hint {:fg "#41624d"}
-   :Info {:fg "#81bdf2"}
-   :Warning {:fg "#ff9983"}
+   :Info :Hint
+   :Warning {:fg "#eeb943"}
    ;; Cursor
    :Cursor {:style inv}
    :CursorColumn {:bg "#3c3836"}
@@ -91,7 +103,7 @@
    :CursorLineNr {:bg "#242a32" :fg "#ebdbb2"}
    ;; Statusline
    :StatusLine {:fg :White :style ul}
-   :StatusLineNC {:fg "#83a598" :style ul}
+   :StatusLineNC {:fg "#333c61" :style ul}
    :StatusLineTerm :StatusLine
    :StatusLineTermNC :StatusLineNC
    ;; Notify
@@ -104,16 +116,16 @@
    :ColorColumn {:bg "#35312f"}
    :SignColumn {:bg nil}
    ;; Diffs
-   :DiffAdd {:fg "#50de60" :style inv}
-   :DiffChange {:fg "#fabd2f" :style inv}
-   :DiffDelete {:fg "#fb4934" :style inv}
-   :DiffText {:style inv}
+   :diffAdded {:fg "#50de60"}
+   :diffChanged {:fg "#faad2f"}
+   :diffRemoved {:fg "#FF3777"}
+   :diffCommon {:style inv}
    ;; Folds
    :FoldColumn {:bg "#242a32" :style b}
    :Folded {:fg "#83a598" :style i}
    ;; Popup Menu
-   :Pmenu {:bg "#44444F" :fg "#ebdbb2" :blend 10}
-   :PmenuSel {:style b :fg "#3c3836" :bg "#ebdbb2"}
+   :Pmenu {:bg "#333363" :fg "#ebdbb2" :blend 10}
+   :PmenuSel {:bg "#22ffff" :fg "#333363" :style b}
    :PmenuSbar {:fg "#ebdbb2" :bg "#537568"}
    :PmenuThumb {:bg "#335548"}
    :WildMenu :Pmenu
@@ -135,12 +147,12 @@
    :MatchParen {:fg "#fabd2f" :style b}
    :Search {:bg "#fabd2f" :fg "#242a32"}
    ;; Spelling
-   :SpellBad {:style {1 uc :color "#fb4934"}}
+   :SpellBad {:style {1 uc :color "#227777"}}
    :SpellCap {:style {1 uc :color "#fabd2f"}}
    :SpellLocal {:style {1 uc :color "#98C379"}}
    :SpellRare {:style {1 uc :color "#fe8019"}}
    ;; Messages
-   :ErrorMsg {:fg "#fb4934" :style b}
+   :ErrorMsg {:fg "#227777" :style b}
    :HintMsg {:fg "#d5508f" :style b}
    :InfoMsg {:fg "#98C379"}
    :ModeMsg {:fg "#fabd2f"}
@@ -148,21 +160,71 @@
    :Question {:fg "#f0af00" :style ul}
    ;; Misc
    :Directory {:fg "#49a0f0" :style b}
-   :Builtin {:fg "#fb4934" :style b}
+   :Builtin {:fg "#227777" :style b}
    ;; LSP
    :DiagnosticError :Error
    :DiagnosticHint :Hint
    :DiagnosticInfo :Info
    :DiagnosticWarn :Warning
-   :DiagnosticUnderlineError {:style {1 uc :color "#e02730"}}
-   :DiagnosticUnderlineWarn {:style {1 uc :color "#71626d"}}
-   :DiagnosticUnderlineInfo {:style {1 uc :color "#61525d"}}
-   :DiagnosticUnderlineHint {:style {1 uc :color :Green}}
+   :DiagnosticUnderlineError {:style {1 uc :color "#ff1153"}}
+   :DiagnosticUnderlineWarn {:style {1 uc :color "#fabd2f"}}
+   :DiagnosticUnderlineInfo :DiagnosticUnderlineHint
+   :DiagnosticUnderlineHint {:style {1 uc :color "#41624d"}}
    :LspReferenceRead {:fg "#FFCA33" :style b}
    :LspReferenceText {:fg "#FFAA33" :style b}
    :LspReferenceWrite {:fg "#FF8A33" :style b}
-   :LspCodeLens {:fg "#00d0c0" :style i}
+   :LspCodeLens {:fg "#f5f5ff" :bg "#2e1c41" :style nil}
+   :LspCodeLensSeparator nil
    :LspSignatureActiveParameter {:style {1 uc :color "#fabd2f"}}
+   :LspInlayHint :Comment
+   ;; ZSH
+   :zshQuoted :SpecialChar
+   :zshPOSIXQuoted :SpecialChar
+   :zshStringDelimiter :Delimiter
+   :zshString :String
+   :zshPOSIXString :zshString
+   :zshJobSpec :Special
+   :zshNumber :Number
+   :zshPrecommand :Special
+   :zshDelimiter :Delimiter
+   :zshConditional :Conditional
+   :zshCase :zshConditional
+   :zshCaseWord :zshConditional
+   :zshCaseIn :zshConditional
+   :zshCasePattern :Constant
+   :zshRepeat :Repeat
+   :zshVariable :Identifier
+   :zshException :Exception
+   :zshKeyword :Keyword
+   :zshKSHFunction :zshFunction
+   :zshFunction :Function
+   :zshOperator :Operator
+   :zshRedir :Operator
+   :zshHereDoc :Special
+   :zshVariableDef :zshVariable
+   :zshShortDeref :zshDereferencing
+   :zshLongDeref :zshDereferencing
+   :zshDeref :zshDereferencing
+   :zshDollarVar :zshDereferencing
+   :zshCommands :Keyword
+   :zshOption :Constant
+   :zshOptStart :Keyword
+   :zshComment :Comment
+   :zshTypes :Type
+   :zshSubst :PreProc
+   :zshOldSubst :zshSubst
+   :zshMathSubst :zshSubst
+   :zshSubstQuoted :zshSubst
+   :zshSubstDelim :zshSubst
+   :zshBrackets :Delimiter
+   :zshParentheses :Delimiter
+   :zshGlob :Constant
+   :zshHereDocSync :Special
+   :zshHereDocEndSync :Special
+   :zshTodo :Todo
+   :zshPreProc :PreProc
+   :zshDereferencing :PreProc
+   :zshSwitches :Special
    ;; TreeSitter (:he nvim-treesitter-highlights)
    :TSAnnotation :PreProc
    :TSAttribute :PreProc
@@ -222,5 +284,24 @@
    :TSVariable :Normal
    :TSVariableBuiltin :Special
    ;TSWarning :Warning
-   })
+   "@string" :String
+   "@variable" :Variable
+   "@parameter" :Parameter
+   "@constant" :Constant
+   "@string.gomod" :Number
+   ;; Semantic Tokens
+   ;"@lsp.mod.defaultLibrary" :Special
+   ;"@lsp.mod.definition" :Define
+   ;"@lsp.typemod.parameter.definition" :Special
+   "@lsp.typemod.variable.readonly" :Constant
+   "@lsp.type.variable" :Variable
+   "@lsp.type.keyword" :Keyword
+   "@lsp.type.namespace" :Include
+   "@lsp.type.parameter" "@parameter"
+   "@lsp.typemod.type.defaultLibrary" :BuiltinType
+   "@lsp.typemod.function.defaultLibrary" :BuiltinFunction
+   "@lsp.type.typeParameter" :ParameterType
+   "@lsp.type.type" :Type
+   ;"@lsp.mod.readonly" :Constant
+  })
 
