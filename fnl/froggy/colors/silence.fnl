@@ -1,4 +1,4 @@
-(set vim.g.colors_name :challenge)
+(set vim.g.colors_name :silence)
 
 ;; <highlight group name> {
 ;;   :bg <color>      ;; The color for the background
@@ -12,6 +12,10 @@
 ;; 
 ;; You can also link one highlight group to another:
 ;; <highlight group name> '<highlight group name>'
+
+;; https://github.com/rose-pine/neovim/blob/main/lua/rose-pine/theme.lua#L266-L280
+;; https://github.com/catppuccin/nvim/blob/main/lua/catppuccin/groups/integrations/semantic_tokens.lua
+;; https://github.com/folke/tokyonight.nvim/blob/main/lua/tokyonight/theme.lua#L255-L272
 
 ;; fnlfmt: skip
 (let [b :bold
@@ -33,54 +37,50 @@
    :FloatBorder {:bg "#333363" :fg "#229999" :blend 10}
    :FloatTitle :PMenu
    ;; Text Analysis
-   :Comment {:fg "#555566" :style i}
+   :Comment {:fg "#666677" :style i}
    :NonText {:fg "#83a598"}
    :EndOfBuffer :NonText
    :Whitespace :NonText
    ;; Literals
-   :Constant :String
-   :String {:fg "#c9ff9a"}
-   :Character {:fg "#aae9ff"}
-   :Number {:fg "#ffccee"}
-   :Boolean {:fg "#ffccee"}
+   :Constant {:fg "#52c9c9" :bg "#2e1c3f"}
+   :String :Identifier
+   :Character :Identifier
+   :Number :Identifier
+   :Boolean :Identifier
    :Float :Number
    ;; Identifiers
-   :Variable {:fg "#fefeee"}
-   :Parameter {:fg "#feceee"}
-   :Identifier {:fg "#83a598"}
-   :Function {:fg "#ff77a7" :style [b i]}
-   :BuiltinFunction {:fg "#ff4444" :style b}
+   :Variable {:fg "#229999"}
+   :Identifier {:fg "#666686"}
+   :Function :Identifier
    ;; Syntax
-   :Statement {:fg "#ffff60"}
-   :Conditional {:fg "#91ddff" :style i}
-   :Repeat :Keyword
-   :Label {:fg "#ffe9aa" :bg "#551133" :style i}
-   :Operator :Type
-   :Keyword :Include
-   :Exception {:fg "#227777" :style b}
+   :Statement :Identifier
+   :Conditional :Identifier
+   :Repeat :Identifier
+   :Label :Identifier
+   :Operator :Identifier
+   :Keyword {:fg "#eeb943"}
+   :Exception :Identifier
    :Noise :Delimiter
    ;; Semantics
-   :StorageClass {:fg "#fe8019"}
-   :Structure :Type
-   :Type {:fg "#bf9a55"}
-   :BuiltinType {:fg "#dfaa65"}
-   :ParameterType {:fg "#ffca55" :style b}
-   :TypeType {:fg "#caff55" :style b}
-   :Typedef :Type
+   :StorageClass :Identifier
+   :Structure :Identifier
+   :Type :Identifier
+   :Typedef :Identifier
    ;; Metatextual Information
-   :Define {:fg "#ff4787"}
-   :Include {:fg "#ff2163"}
-   :PreProc {:fg "#15a193"}
-   :Macro {:fg "#83a598" :style i}
-   :PreCondit {:fg "#f4c069" :style i}
+   :Namespace {:fg "#ff3183"}
+   :Define :Identifier
+   :Include :Namespace
+   :PreProc :Identifier
+   :Macro :Identifier
+   :PreCondit :Identifier
    ;; Edge Cases
    :Debug :WarningMsg
-   :Delimiter {:fg "#777777"}
-   :Special {:fg "#d5F08f" :style b}
-   :SpecialChar {:fg "#aaaab6" :style i}
-   :SpecialComment {:fg "#928374" :style b}
-   :SpecialKey :Character
-   :Tag :Underlined
+   :Delimiter :Identifier
+   :Special :Identifier
+   :SpecialChar :Identifier
+   :SpecialComment :Identifier
+   :SpecialKey :Identifier
+   :Tag :Identifier
    ;; Help Syntax
    :Underlined {:fg "#2bff99" :style ul}
    :Ignore {:fg "#928374"}
@@ -89,12 +89,12 @@
    "@text.danger" :Todo
    "@text.warning" :Todo
    "@text.note" {:fg "#fff0f0"}
-   "@text.uri" {:fg "#c9ff9a" :style [i ul]}
+   "@text.uri" {:fg "#91ddff" :style [i ul]}
    :helpHyperTextJump :Underlined
    :helpSpecial :Special
    :Hint {:fg "#41624d"}
-   :Info :Hint
-   :Warning {:fg "#eeb943"}
+   :Info {:fg "#705090"}
+   :Warning {:fg "#905070"}
    ;; Cursor
    :Cursor {:style inv}
    :CursorColumn {:bg "#3c3836"}
@@ -168,12 +168,12 @@
    :DiagnosticWarn :Warning
    :DiagnosticUnderlineError {:style {1 uc :color "#ff1153"}}
    :DiagnosticUnderlineWarn {:style {1 uc :color "#fabd2f"}}
-   :DiagnosticUnderlineInfo :DiagnosticUnderlineHint
-   :DiagnosticUnderlineHint {:style {1 uc :color "#41624d"}}
+   :DiagnosticUnderlineInfo {:style {1 uc :color "#905070"}}
+   :DiagnosticUnderlineHint {:style {1 uc :color :Green}}
    :LspReferenceRead {:fg "#FFCA33" :style b}
    :LspReferenceText {:fg "#FFAA33" :style b}
    :LspReferenceWrite {:fg "#FF8A33" :style b}
-   :LspCodeLens {:fg "#f5f5ff" :bg "#2e1c41" :style nil}
+   :LspCodeLens {:fg "#22ffff" :bg "#3e1c71" :style i}
    :LspCodeLensSeparator nil
    :LspSignatureActiveParameter {:style {1 uc :color "#fabd2f"}}
    :LspInlayHint :Comment
@@ -226,69 +226,67 @@
    :zshDereferencing :PreProc
    :zshSwitches :Special
    ;; TreeSitter (:he nvim-treesitter-highlights)
-   :TSAnnotation :PreProc
-   :TSAttribute :PreProc
-   :TSBoolean :Boolean
-   :TSCharacter :Character
-   :TSConditional :Conditional
-   :TSConstBuiltin :Constant
-   :TSConstMacro :Define
-   :TSConstant :Constant
-   :TSConstructor :Identifier
-   :TSDanger :WarningMsg
-   :TSEmphasis {:style i}
-   :TSEnviroment :Macro
-   :TSEnviromentName :Type
-   :TSError :Error
-   :TSException :Exception
-   :TSField :Identifier
-   :TSFloat :Float
-   :TSFuncBuiltin :Function
-   :TSFuncMacro :Macro
-   :TSFunction :Function
-   :TSInclude :Include
-   :TSKeyword :Keyword
-   :TSKeywordFunction :Keyword
-   :TSKeywordOperator :Operator
-   :TSLabel :Label
-   :TSLiteral :String
-   :TSMath :Special
-   :TSMethod :Method
-   :TSNamespace :Include
-   :TSNone {}
-   :TSNote :Note
-   :TSNumber :Number
-   :TSOperator :Operator
-   :TSParameter :Argument
-   :TSParameterReference :Argument
-   :TSProperty :Identifier
-   :TSPunctBracket :Delimiter
-   :TSPunctDelimiter :Delimiter
-   :TSPunctSpecial :Delimiter
-   :TSRepeat :Repeat
-   :TSStrike {:style ul}
-   :TSString :String
-   :TSStringEscape :SpecialChar
-   :TSStringRegex :String
-   :TSStrong {:style b}
-   :TSSymbol :Symbol
-   :TSTag :Label
-   :TSTagDelimiter :Delimiter
-   :TSText :Text
-   :TSTextReference :Constant
-   :TSTitle :Title
-   :TSType :Type
-   :TSTypeBuiltin :Type
-   :TSURI :Underlined
-   :TSUnderline {:style ul}
-   :TSVariable :Normal
-   :TSVariableBuiltin :Special
+   ;:TSAnnotation :PreProc
+   ;:TSAttribute :PreProc
+   ;:TSBoolean :Boolean
+   ;:TSCharacter :Character
+   ;:TSConditional :Conditional
+   ;:TSConstBuiltin :Constant
+   ;:TSConstMacro :Define
+   ;:TSConstant :Constant
+   ;:TSConstructor :Identifier
+   ;:TSDanger :WarningMsg
+   ;:TSEmphasis {:style i}
+   ;:TSEnviroment :Macro
+   ;:TSEnviromentName :Type
+   ;:TSError :Error
+   ;:TSException :Exception
+   ;:TSField :Identifier
+   ;:TSFloat :Float
+   ;:TSFuncBuiltin :Function
+   ;:TSFuncMacro :Macro
+   ;:TSFunction :Function
+   ;:TSInclude :Include
+   ;:TSKeyword :Keyword
+   ;:TSKeywordFunction :Keyword
+   ;:TSKeywordOperator :Operator
+   ;:TSLabel :Label
+   ;:TSLiteral :String
+   ;:TSMath :Special
+   ;:TSMethod :Method
+   ;:TSNamespace :Include
+   ;:TSNone {}
+   ;:TSNote :Note
+   ;:TSNumber :Number
+   ;:TSOperator :Operator
+   ;:TSParameter :Argument
+   ;:TSParameterReference :Argument
+   ;:TSProperty :Identifier
+   ;:TSPunctBracket :Delimiter
+   ;:TSPunctDelimiter :Delimiter
+   ;:TSPunctSpecial :Delimiter
+   ;:TSRepeat :Repeat
+   ;:TSStrike {:style ul}
+   ;:TSString :String
+   ;:TSStringEscape :SpecialChar
+   ;:TSStringRegex :String
+   ;:TSStrong {:style b}
+   ;:TSSymbol :Symbol
+   ;:TSTag :Label
+   ;:TSTagDelimiter :Delimiter
+   ;:TSText :Text
+   ;:TSTextReference :Constant
+   ;:TSTitle :Title
+   ;:TSType :Type
+   ;:TSTypeBuiltin :Type
+   ;:TSURI :Underlined
+   ;:TSUnderline {:style ul}
+   ;:TSVariable :Normal
+   ;:TSVariableBuiltin :Special
    ;TSWarning :Warning
-   "@string" :String
+   "@string" {:fg "#f1ff5d"}
    "@variable" :Variable
-   "@parameter" :Parameter
    "@constant" :Constant
-   "@string.gomod" :Number
    ;; Semantic Tokens
    ;"@lsp.mod.defaultLibrary" :Special
    ;"@lsp.mod.definition" :Define
@@ -297,11 +295,6 @@
    "@lsp.type.variable" :Variable
    "@lsp.type.keyword" :Keyword
    "@lsp.type.namespace" :Include
-   "@lsp.type.parameter" "@parameter"
-   "@lsp.typemod.type.defaultLibrary" :BuiltinType
-   "@lsp.typemod.function.defaultLibrary" :BuiltinFunction
-   "@lsp.type.typeParameter" :ParameterType
-   "@lsp.type.type" :Type
    ;"@lsp.mod.readonly" :Constant
-  })
+   })
 
