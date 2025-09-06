@@ -122,7 +122,7 @@
    :diffCommon {:style inv}
    ;; Folds
    :FoldColumn {:bg "#242a32" :style b}
-   :Folded {:fg "#83a598" :style i}
+   :Folded {:fg "#2a2a2a" :style i}
    ;; Popup Menu
    :Pmenu {:bg "#333363" :fg "#ebdbb2" :blend 10}
    :PmenuSel {:bg "#22ffff" :fg "#333363" :style b}
